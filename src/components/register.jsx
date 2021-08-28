@@ -1,4 +1,6 @@
+import axios from 'axios'
 import React, { Component } from 'react'
+import RegisterForm from './registerForm'
 
 class Register extends Component {
   state = {
@@ -11,57 +13,37 @@ class Register extends Component {
   handleChange = event => {
     let id = event.target.id
     this.setState({ [id]: event.target.value })
-    console.log(this.state)
+  }
+
+  handleSubmit = event => {
+    const { name, username, email, password } = this.state
+    event.preventDefault()
+    axios
+      .post('http://localhost:5000/api/users/register', {
+        name,
+        username,
+        email,
+        password,
+      })
+      .then(res => {
+        console.log(res.header)
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
   render() {
+    const { name, username, email, password } = this.state
     return (
-      <form action='submit'>
-        <div className='mb-3'>
-          <label htmlFor='name' className='form-label'>
-            Name:
-          </label>
-          <input
-            id='name'
-            type='text'
-            className='form-control'
-            onChange={this.handleChange}
-          />
-          <label htmlFor='username' className='form-label'>
-            Username:
-          </label>
-          <input
-            id='username'
-            type='text'
-            className='form-control'
-            onChange={this.handleChange}
-          />
-          <label htmlFor='email' className='form-label'>
-            Email:
-          </label>
-          <input
-            id='email'
-            type='email'
-            className='form-control'
-            onChange={this.handleChange}
-          />
-          <label htmlFor='password' className='form-label'>
-            Password:
-          </label>
-          <input
-            id='password'
-            type='password'
-            className='form-control'
-            onChange={this.handleChange}
-          />
-        </div>
-        <button className='btn btn-primary' type='submit'>
-          Sign Up
-        </button>
-        <a className='btn btn-info'>
-          Already Have An Account
-        </a>
-      </form>
+      <RegisterForm
+        name={name}
+        username={username}
+        email={email}
+        password={password}
+        onChange={this.handleChange}
+        request={this.handleSubmit}
+      />
     )
   }
 }
