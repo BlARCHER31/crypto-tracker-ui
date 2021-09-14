@@ -1,49 +1,48 @@
-import axios from 'axios'
-import React, { Component } from 'react'
-import RegisterForm from './registerForm'
+import React from 'react'
+import Joi from 'joi-browser'
+import Form from './common/form'
+import * as userService from './../services/userService'
 
-class Register extends Component {
+class Register extends Form {
   state = {
-    name: '',
-    username: '',
-    email: '',
-    password: '',
+    data: {
+      name: '',
+      username: '',
+      email: '',
+      password: '',
+    },
+    errors: {},
   }
 
-  handleChange = event => {
-    let id = event.target.id
-    this.setState({ [id]: event.target.value })
+  schema = {
+    username: Joi.string().required().label('Username'),
+    email: Joi.string().email().required().label('Email'),
+    name: Joi.string().required().label('Name'),
+    password: Joi.string().required().label('Password'),
   }
 
-  handleSubmit = event => {
-    const { name, username, email, password } = this.state
-    event.preventDefault()
-    axios
-      .post('http://localhost:5000/api/users/register', {
-        name,
-        username,
-        email,
-        password,
-      })
-      .then(res => {
-        console.log(res.header)
-      })
-      .catch(err => {
-        console.log(err.message)
-      })
+  doSubmit = async () => {
+    
+    try {
+      const result = await userService.register()
+      console.log(result)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render() {
-    const { name, username, email, password } = this.state
     return (
-      <RegisterForm
-        name={name}
-        username={username}
-        email={email}
-        password={password}
-        onChange={this.handleChange}
-        request={this.handleSubmit}
-      />
+      <React.Fragment>
+        <h1>Register New User</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput('name', 'Name')}
+          {this.renderInput('username', 'Username')}
+          {this.renderInput('email', 'Email', 'email')}
+          {this.renderInput('password', 'Password', 'password')}
+          {this.renderButton('Register User')}
+        </form>
+      </React.Fragment>
     )
   }
 }
