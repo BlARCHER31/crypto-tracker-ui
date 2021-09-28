@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch } from 'react-router-dom'
-import Register from './components/register'
+import Register from './components/registerForm'
 import NavBar from './components/navBar'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
