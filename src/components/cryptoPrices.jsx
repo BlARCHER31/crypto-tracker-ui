@@ -2,6 +2,7 @@ import React from 'react'
 import coinbase from '../services/coinBaseService'
 import Joi from 'joi-browser'
 import Form from './common/form'
+import AddButton from './common/addButton'
 
 class CryptoPrices extends Form {
   state = {
@@ -19,17 +20,6 @@ class CryptoPrices extends Form {
     this.setState({ crypto: cryptoInfo })
   }
 
-  // componentDidUpdate() {
-  //   // let cryptoInfo = []
-  //   // this.crypto.forEach(async crypto => {
-  //   //   for (const key in crypto) {
-  //   //     const cryptoData = await this.getPrice(crypto[key])
-  //   //     cryptoInfo.push(cryptoData)
-  //   //   }
-  //   // })
-  //   // this.setState({ crypto: cryptoInfo })
-  // }
-
   schema = { crypto: Joi.string().required().label('Crypto') }
 
   crypto = [
@@ -45,18 +35,6 @@ class CryptoPrices extends Form {
     { Dogecoin: 'DOGE' },
   ]
 
-  cryptoTwo = [
-    'BTC',
-    'ETH',
-    'USDT',
-    'ADA',
-    'BNB',
-    'XRP',
-    'SOL',
-    'USDC',
-    'DOT',
-    'DOGE',
-  ]
   getPrice = async tickerSymbol => {
     const cryptoInfo = await coinbase.getCryptoPrice(tickerSymbol)
 
@@ -64,6 +42,7 @@ class CryptoPrices extends Form {
   }
 
   render() {
+    const { user } = this.props
     return (
       <div>
         <h1>Current Crypto Prices</h1>
@@ -83,11 +62,15 @@ class CryptoPrices extends Form {
                     <th>{crypto['base']}</th>
                     <td>{`$${crypto['amount']}`}</td>
                     <td>{crypto['currency']}</td>
+                    {user && (
+                      <td>
+                        <AddButton />
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
             </table>
-            <button onClick={this.doSubmit}>Click</button>
           </div>
         )}
       </div>

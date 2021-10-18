@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-function getCryptoPrice(crytoTicker) {
+async function getCryptoPrice(crytoTicker) {
   let cryptoData
   try {
-    cryptoData = axios.get(`http://localhost:5000/api/coinbase/${crytoTicker}`)
+    cryptoData = await axios.get(
+      `http://localhost:5000/api/coinbase/${crytoTicker}`
+    )
     return cryptoData
   } catch (error) {}
 }
