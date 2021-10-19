@@ -2,78 +2,53 @@ import React from 'react'
 import coinbase from '../services/coinBaseService'
 import Joi from 'joi-browser'
 import Form from './common/form'
+import uphold from '../services/upholdService'
 import AddButton from './common/addButton'
 
 class CryptoPrices extends Form {
   state = {
+    data: {
+      ticker: '',
+    },
+    cryptoData: '',
     errors: {},
   }
 
-  componentDidMount() {
-    let cryptoInfo = []
-    this.crypto.forEach(async crypto => {
-      for (const key in crypto) {
-        const cryptoData = await this.getPrice(crypto[key])
-        cryptoInfo.push(cryptoData)
+  doSubmit = async () => {
+    const { data } = this.state
+    try {
+      let response = await coinbase.getCryptoPrice(data.ticker)
+      let cryptoData = response.data
+      if (!cryptoData) {
+        response = await uphold.getUpholdPrice(data.ticker)
+        cryptoData = response.data
       }
-    })
-    this.setState({ crypto: cryptoInfo })
+      console.log(cryptoData)
+      this.setState({ cryptoData })
+      console.log(this.state)
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        const errors = { ...this.state.errors }
+        errors.email = error.response.data.message
+        this.setState({ errors })
+      }
+    }
   }
 
-  schema = { crypto: Joi.string().required().label('Crypto') }
-
-  crypto = [
-    { Bitcoin: 'BTC' },
-    { Ethereum: 'ETH' },
-    { Tether: 'USDT' },
-    { Cardano: 'ADA' },
-    { Uniswap: 'UNI' },
-    { 'Shiba Inu': 'SHIB' },
-    { Solana: 'SOL' },
-    { 'USD Coin': 'USDC' },
-    { Polkadot: 'DOT' },
-    { Dogecoin: 'DOGE' },
-  ]
-
-  getPrice = async tickerSymbol => {
-    const cryptoInfo = await coinbase.getCryptoPrice(tickerSymbol)
-
-    return cryptoInfo.data
+  schema = {
+    ticker: Joi.string().required().label('Ticker Symbol'),
   }
 
   render() {
     const { user } = this.props
     return (
-      <div>
-        <h1>Current Crypto Prices</h1>
-        {this.state.crypto && (
-          <div>
-            <table className='table'>
-              <thead>
-                <tr>
-                  <th scope='col'>Ticker</th>
-                  <th scope='col'>Current Price</th>
-                  <th scope='col'>Currency</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.state.crypto.map(crypto => (
-                  <tr key={crypto['base']}>
-                    <th>{crypto['base']}</th>
-                    <td>{`$${crypto['amount']}`}</td>
-                    <td>{crypto['currency']}</td>
-                    {user && (
-                      <td>
-                        <AddButton />
-                      </td>
-                    )}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      <React.Fragment>
+        <h1>Get Current Crypto Prices</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput('ticker', 'Ticker Symbol')}
+          {this.renderButton('Search')}
+        </form>
+      </React.Fragment>
     )
   }
 }

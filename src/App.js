@@ -8,7 +8,6 @@ import CryptoPrices from './components/cryptoPrices'
 import Profile from './components/profile'
 import auth from './services/authService'
 import './App.css'
-import CryptoMarket from './components/cryptoMarket'
 
 const App = () => {
   const [user, setUser] = useState()
@@ -38,7 +37,7 @@ const App = () => {
           />
           <Route
             path='/prices'
-            render={props => <CryptoMarket {...props} user={user} />}
+            render={props => <CryptoPrices {...props} user={user} />}
           />
           <Route path='/login' component={Login} />
           <Route path='/logout' component={Logout} />
