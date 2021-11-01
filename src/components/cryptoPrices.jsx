@@ -3,7 +3,7 @@ import coinbase from '../services/coinBaseService'
 import Joi from 'joi-browser'
 import Form from './common/form'
 import uphold from '../services/upholdService'
-import AddButton from './common/addButton'
+import AddToPortFolio from './addToPortfolioForm'
 
 class CryptoPrices extends Form {
   state = {
@@ -16,16 +16,16 @@ class CryptoPrices extends Form {
 
   doSubmit = async () => {
     const { data } = this.state
+
     try {
-      let response = await coinbase.getCryptoPrice(data.ticker)
+      const uppercaseTicker = data.ticker.toUpperCase()
+      let response = await coinbase.getCryptoPrice(uppercaseTicker)
       let cryptoData = response.data
       if (!cryptoData) {
-        response = await uphold.getUpholdPrice(data.ticker)
+        response = await uphold.getUpholdPrice(uppercaseTicker)
         cryptoData = response.data
       }
-      console.log(cryptoData)
-      this.setState({ cryptoData })
-      console.log(this.state)
+      this.setState({ cryptoData, ticker: uppercaseTicker })
     } catch (error) {
       if (error.response && error.response.status === 400) {
         const errors = { ...this.state.errors }
@@ -41,6 +41,8 @@ class CryptoPrices extends Form {
 
   render() {
     const { user } = this.props
+    const { cryptoData, data, success } = this.state
+    const buyPrice = cryptoData.amount || cryptoData.bid
     return (
       <React.Fragment>
         <h1>Get Current Crypto Prices</h1>
@@ -48,6 +50,32 @@ class CryptoPrices extends Form {
           {this.renderInput('ticker', 'Ticker Symbol')}
           {this.renderButton('Search')}
         </form>
+        {cryptoData ? (
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Current Price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>{data.ticker.toUpperCase()}</th>
+                <td>{buyPrice}</td>
+                <td>
+                  {user && !success ? (
+                    <AddToPortFolio
+                      _id={user._id}
+                      name={data.ticker}
+                      buyPrice={buyPrice}
+                    />
+                  ) : null}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        ) : null}
       </React.Fragment>
     )
   }
