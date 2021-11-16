@@ -41,7 +41,7 @@ class CryptoPrices extends Form {
 
   render() {
     const { user } = this.props
-    const { cryptoData, data, success } = this.state
+    const { cryptoData, data } = this.state
     const buyPrice = cryptoData.amount || cryptoData.bid
     return (
       <React.Fragment>
@@ -64,7 +64,7 @@ class CryptoPrices extends Form {
                 <th>{data.ticker.toUpperCase()}</th>
                 <td>{buyPrice}</td>
                 <td>
-                  {user && !success ? (
+                  {user ? (
                     <AddToPortFolio
                       _id={user._id}
                       name={data.ticker}

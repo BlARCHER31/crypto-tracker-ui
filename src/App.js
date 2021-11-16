@@ -29,9 +29,9 @@ const App = () => {
       <div className='container'>
         <Switch>
           <Route
-            path='/profile'
+            path='/profile/'
             render={() => {
-              if (!user) return <Redirect from='/profile' to='/login' />
+              if (!user) return <Redirect from='/profile/' to='/login' />
               return <Profile user={user} />
             }}
           />

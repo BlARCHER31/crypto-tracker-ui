@@ -6,7 +6,7 @@ const NavBar = ({ user }) => {
     <nav className='navbar navbar-expand-md navbar-dark bg-primary'>
       <div className='container-fluid'>
         <Link className='navbar-brand' to='/'>
-          Archer Programming
+          Crypto Portfolio Tracker
         </Link>
         <button
           className='navbar-toggler'
@@ -37,7 +37,7 @@ const NavBar = ({ user }) => {
             )}
             {user && (
               <React.Fragment>
-                <Link className='nav-link' to='/profile'>
+                <Link className='nav-link' to={`/profile`}>
                   {user.name}
                 </Link>
                 <Link className='nav-link' to='/logout'>
