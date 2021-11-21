@@ -8,8 +8,6 @@ const ProfileTable = ({ id }) => {
     setTable(await mongoDbService.getPortfolio(id))
   }, [])
 
-  
-
   return !table ? null : (
     <table>
       <thead>
@@ -21,15 +19,12 @@ const ProfileTable = ({ id }) => {
         </tr>
       </thead>
       <tbody>
+        {console.log(table)}
         {table.map(crypto => (
           <tr>
             <td>{crypto.cryptoName}</td>
-            {crypto.purchaseDetails.map(detail => (
-              <React.Fragment>
-                <td>{detail.buyPrice}</td>
-                <td>{detail.amount}</td>
-              </React.Fragment>
-            ))}
+            <td>{crypto.averageBuyPrice}</td>
+            <td>{crypto.amount}</td>
           </tr>
         ))}
       </tbody>
