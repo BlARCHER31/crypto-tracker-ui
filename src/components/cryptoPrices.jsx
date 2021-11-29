@@ -1,9 +1,8 @@
 import React from 'react'
-import coinbase from '../services/coinBaseService'
 import Joi from 'joi-browser'
 import Form from './common/form'
-import uphold from '../services/upholdService'
 import AddToPortFolio from './addToPortfolioForm'
+import fetchPrice from '../services/cryptoCurrentPrice'
 
 class CryptoPrices extends Form {
   state = {
@@ -16,14 +15,14 @@ class CryptoPrices extends Form {
 
   doSubmit = async () => {
     const { data } = this.state
-
+    const uppercaseTicker = data.ticker.toUpperCase()
     try {
-      const uppercaseTicker = data.ticker.toUpperCase()
-      let response = await coinbase.getCryptoPrice(uppercaseTicker)
-      let cryptoData = response.data
+      let response = await fetchPrice.getCryptoPrice(uppercaseTicker)
+      let cryptoData = response
       if (!cryptoData) {
-        response = await uphold.getUpholdPrice(uppercaseTicker)
-        cryptoData = response.data
+        throw new Error(
+          `Sorry could not find information for ${uppercaseTicker}.`
+        )
       }
       this.setState({ cryptoData, ticker: uppercaseTicker })
     } catch (error) {
@@ -32,6 +31,7 @@ class CryptoPrices extends Form {
         errors.email = error.response.data.message
         this.setState({ errors })
       }
+      alert(error.message)
     }
   }
 
@@ -42,7 +42,6 @@ class CryptoPrices extends Form {
   render() {
     const { user } = this.props
     const { cryptoData, data } = this.state
-    const buyPrice = cryptoData.amount || cryptoData.bid
     return (
       <React.Fragment>
         <h1>Get Current Crypto Prices</h1>
@@ -62,13 +61,13 @@ class CryptoPrices extends Form {
             <tbody>
               <tr>
                 <th>{data.ticker.toUpperCase()}</th>
-                <td>{buyPrice}</td>
+                <td>{cryptoData}</td>
                 <td>
                   {user ? (
                     <AddToPortFolio
                       _id={user._id}
-                      name={data.ticker}
-                      buyPrice={buyPrice}
+                      name={data.ticker.toUpperCase()}
+                      buyPrice={cryptoData}
                     />
                   ) : null}
                 </td>
