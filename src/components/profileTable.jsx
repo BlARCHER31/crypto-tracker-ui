@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import mongoDbService from '../services/mongoDbService'
+import ProfileTableRow from './profileTableRow'
 
 const ProfileTable = ({ id }) => {
   const [table, setTable] = useState()
+  const [errors, setErrors] = useState({})
 
-  useEffect(async () => {
-    setTable(await mongoDbService.getPortfolio(id))
+  useEffect(() => {
+    const fetchUserPortfolio = async () => {
+      try {
+        const userPortfolio = await mongoDbService.getPortfolio(id)
+        setTable(userPortfolio)
+      } catch (error) {
+        setErrors(error)
+      }
+    }
+    fetchUserPortfolio()
   }, [])
 
   return !table ? null : (
@@ -19,13 +29,8 @@ const ProfileTable = ({ id }) => {
         </tr>
       </thead>
       <tbody>
-        {console.log(table)}
         {table.map(crypto => (
-          <tr>
-            <td>{crypto.cryptoName}</td>
-            <td>{crypto.averageBuyPrice}</td>
-            <td>{crypto.amount}</td>
-          </tr>
+          <ProfileTableRow key={crypto.name} info={crypto} />
         ))}
       </tbody>
     </table>
