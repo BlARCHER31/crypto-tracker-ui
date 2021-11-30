@@ -9,11 +9,11 @@ const ProfileTableRow = ({ info, key }) => {
     fetchCurrentPrice.getCryptoPrice(info.cryptoName).then(setCurrentPrice)
   }, [info])
   return (
-    <tr key={key}>
-      <td>{info.cryptoName}</td>
-      <td>{info.averageBuyPrice}</td>
-      <td>{info.amount}</td>
-      <td>{currentPrice ?? <Loading />}</td>
+    <tr>
+      <td key={info.cryptoName}>{info.cryptoName}</td>
+      <td key={info.averageBuyPrice}>{info.averageBuyPrice}</td>
+      <td key={info.amount}>{info.amount}</td>
+      <td key={info.cryptoName + '1'}>{currentPrice ?? <Loading />}</td>
     </tr>
   )
 }
