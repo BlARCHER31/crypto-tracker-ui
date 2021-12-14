@@ -1,12 +1,11 @@
 import React from 'react'
-import Form from './common/form'
 import Joi from 'joi-browser'
+import Form from './common/form'
 import mongoDbService from '../services/mongoDbService'
 
-class AddToPortfolioForm extends Form {
+class AddToPortFolioButton extends Form {
   state = {
     data: {
-      ticker: '',
       amount: 0,
     },
     errors: {},
@@ -14,17 +13,15 @@ class AddToPortfolioForm extends Form {
 
   schema = {
     amount: Joi.number().min(0.000001).label('Amount Purchased'),
-    ticker: Joi.string().label('Ticker Symbol'),
   }
 
-  doSubmit = async e => {
-    const { ticker, amount } = this.state.data
-    const { id } = this.props
-    const cryptoName = ticker.toUpperCase()
+  doSubmit = async () => {
+    const { name: cryptoName, buyPrice, _id } = this.props
+    const { amount } = this.state.data
     try {
-      await mongoDbService.addToPortfolio(cryptoName, amount, id)
+      await mongoDbService.addToPortfolio(cryptoName, buyPrice, amount, _id)
+      window.location = '/prices/'
       alert(`${cryptoName} successfully added to your portfolio.`)
-      window.location.reload()
     } catch (err) {
       alert(err)
     }
@@ -32,15 +29,14 @@ class AddToPortfolioForm extends Form {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput('ticker', 'Ticker Symbol')}
           {this.renderInput('amount', 'Amount Purchased')}
           {this.renderButton('Add to Portfolio')}
         </form>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-export default AddToPortfolioForm
+export default AddToPortFolioButton

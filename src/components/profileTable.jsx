@@ -30,7 +30,7 @@ const ProfileTable = ({ id }) => {
       </thead>
       <tbody>
         {table.map(crypto => (
-          <ProfileTableRow key={crypto.name} info={crypto} />
+          <ProfileTableRow info={crypto} />
         ))}
       </tbody>
     </table>

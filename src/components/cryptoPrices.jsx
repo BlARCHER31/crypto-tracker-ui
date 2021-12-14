@@ -1,8 +1,8 @@
 import React from 'react'
 import Joi from 'joi-browser'
 import Form from './common/form'
-import AddToPortFolio from './addToPortfolioForm'
 import fetchPrice from '../services/cryptoCurrentPrice'
+import AddToPortFolioButton from './addToPortfolio'
 
 class CryptoPrices extends Form {
   state = {
@@ -64,7 +64,7 @@ class CryptoPrices extends Form {
                 <td>{cryptoData}</td>
                 <td>
                   {user ? (
-                    <AddToPortFolio
+                    <AddToPortFolioButton
                       _id={user._id}
                       name={data.ticker.toUpperCase()}
                       buyPrice={cryptoData}

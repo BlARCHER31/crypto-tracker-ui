@@ -8,19 +8,13 @@ import CryptoPrices from './components/cryptoPrices'
 import Profile from './components/profile'
 import auth from './services/authService'
 import './App.css'
+import ProtectedRoute from './components/common/protectedRoute'
 
 const App = () => {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    let active = true
-
-    if (active) {
-      setUser(auth.getCurrentUser())
-    }
-    // return () => {
-    //   active = false
-    // }
+    setUser(auth.getCurrentUser())
   }, [])
 
   return (
@@ -28,13 +22,7 @@ const App = () => {
       <NavBar user={user} />
       <div className='container'>
         <Switch>
-          <Route
-            path='/profile/'
-            render={() => {
-              if (!user) return <Redirect from='/profile/' to='/login' />
-              return <Profile user={user} />
-            }}
-          />
+          <ProtectedRoute path='/profile/' component={Profile} user={user} />
           <Route
             path='/prices'
             render={props => <CryptoPrices {...props} user={user} />}

@@ -1,10 +1,10 @@
 import React from 'react'
 
 import ProfileTable from './profileTable'
+import AddToPortfolioForm from './addToPortfolioForm'
 
 const Profile = ({ user }) => {
   const { username, _id } = user
-
   return (
     <div className='container'>
       <div className='row  m-3'>
@@ -17,6 +17,7 @@ const Profile = ({ user }) => {
           {<ProfileTable id={_id} />}
         </div>
       </div>
+      {<AddToPortfolioForm id={_id} />}
     </div>
   )
 }

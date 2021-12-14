@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-async function addToPortfolio(cryptoName, buyPrice, amount, _id) {
+async function addToPortfolio(cryptoName, amount, _id) {
   const token = localStorage.getItem('token')
   try {
     await axios.put(
       `http://localhost:5000/api/portfolio`,
-      { cryptoName, buyPrice, amount, _id },
+      { cryptoName, amount, _id },
       {
         headers: {
           'x-auth-token': token,
