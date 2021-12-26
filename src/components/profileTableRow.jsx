@@ -1,20 +1,54 @@
+import { ignore } from 'joi-browser'
 import React, { useEffect, useState } from 'react'
 import fetchCurrentPrice from '../services/cryptoCurrentPrice'
+import calculateTotalWorth from '../utils/calculateWorth'
 import Loading from './common/loading'
+import RemoveFromPortfolio from './removeFromPortfolioForm'
 
-const ProfileTableRow = ({ info, key }) => {
+const ProfileTableRow = ({ info, username, onClick }) => {
   const [currentPrice, setCurrentPrice] = useState(null)
+  const [showRemoveForm, setShowRemoveForm] = useState(false)
+
+  function onShowRemoveForm() {
+    setShowRemoveForm(true)
+  }
 
   useEffect(() => {
     fetchCurrentPrice.getCryptoPrice(info.cryptoName).then(setCurrentPrice)
   }, [info])
+
   return (
-    <tr>
-      <td key={info.cryptoName}>{info.cryptoName}</td>
-      <td key={info.averageBuyPrice}>{info.averageBuyPrice}</td>
-      <td key={info.amount}>{info.amount}</td>
-      <td key={info.cryptoName + '1'}>{currentPrice ?? <Loading />}</td>
-    </tr>
+    <React.Fragment>
+      <tr>
+        <td key={info.cryptoName}>{info.cryptoName}</td>
+        <td key={info.amount}>{info.amount}</td>
+        <td key={info.cryptoName + '1'}>{currentPrice ?? <Loading />}</td>
+        <td>
+          {currentPrice ? (
+            calculateTotalWorth(info.amount, currentPrice)
+          ) : (
+            <Loading />
+          )}
+        </td>
+        <td>
+          <button onClick={onShowRemoveForm} className='btn btn-danger'>
+            -
+          </button>
+        </td>
+      </tr>
+      {showRemoveForm ? (
+        <tr className='d-flex'>
+          <td colSpan={4}>
+            <RemoveFromPortfolio
+              cryptoName={info.cryptoName}
+              objId={info._id}
+              username={username}
+              maxAmount={info.amount}
+            />
+          </td>
+        </tr>
+      ) : null}
+    </React.Fragment>
   )
 }
 

@@ -17,7 +17,7 @@ class AddToPortfolioForm extends Form {
     ticker: Joi.string().label('Ticker Symbol'),
   }
 
-  doSubmit = async e => {
+  doSubmit = async () => {
     const { ticker, amount } = this.state.data
     const { id } = this.props
     const cryptoName = ticker.toUpperCase()

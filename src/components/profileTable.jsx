@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import mongoDbService from '../services/mongoDbService'
 import ProfileTableRow from './profileTableRow'
 
-const ProfileTable = ({ id }) => {
+const ProfileTable = ({ id, showAddForm, username, cryptoId }) => {
   const [table, setTable] = useState()
   const [errors, setErrors] = useState({})
 
@@ -19,18 +19,23 @@ const ProfileTable = ({ id }) => {
   }, [])
 
   return !table ? null : (
-    <table>
-      <thead>
+    <table className='table'>
+      <thead className='table-dark'>
         <tr>
           <th>Ticker</th>
-          <th>Average Buy Price</th>
           <th>Amount</th>
           <th>Current Price</th>
+          <th>Total Worth</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {table.map(crypto => (
-          <ProfileTableRow info={crypto} />
+          <ProfileTableRow
+            username={username}
+            info={crypto}
+            cryptoId={cryptoId}
+          />
         ))}
       </tbody>
     </table>
