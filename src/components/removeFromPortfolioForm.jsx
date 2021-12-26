@@ -23,7 +23,7 @@ class RemoveFromPortfolio extends Form {
     const { amount } = this.state.data
     const { objId, username, cryptoName, maxAmount } = this.props
     try {
-      if (amount == maxAmount) {
+      if (amount === maxAmount) {
         await mongoDbService.deletePortfolioItem(username, objId)
         alert(`${cryptoName} successfully removed from your portfolio.`)
         window.location.reload()
