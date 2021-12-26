@@ -16,11 +16,11 @@ class AddToPortFolioButton extends Form {
   }
 
   doSubmit = async () => {
-    const { name: cryptoName, buyPrice, _id } = this.props
+    const { name: cryptoName, _id } = this.props
     const { amount } = this.state.data
     try {
-      await mongoDbService.addToPortfolio(cryptoName, buyPrice, amount, _id)
-      window.location = '/prices/'
+      await mongoDbService.addToPortfolio(cryptoName, amount, _id)
+      window.location.reload()
       alert(`${cryptoName} successfully added to your portfolio.`)
     } catch (err) {
       alert(err)
