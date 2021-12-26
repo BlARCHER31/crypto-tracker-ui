@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-
 import ProfileTable from './profileTable'
 import AddToPortfolioForm from './addToPortfolioForm'
-import RemoveFromPortfolio from './removeFromPortfolioForm'
 
 const Profile = ({ user }) => {
   const { username, _id } = user
@@ -14,12 +12,6 @@ const Profile = ({ user }) => {
     setShowAddForm(true)
     setShowRemoveForm(false)
   }
-
-  function onShowRemoveForm() {
-    setShowAddForm(false)
-    setShowRemoveForm(true)
-  }
-
   return (
     <div className='container'>
       <div className='row  m-4'>
@@ -41,13 +33,7 @@ const Profile = ({ user }) => {
             </h3>
           </div>
 
-          {
-            <ProfileTable
-              username={username}
-              id={_id}
-              cryptoId={cryptoId}
-            />
-          }
+          {<ProfileTable username={username} id={_id} cryptoId={cryptoId} />}
         </div>
       </div>
       {showAddForm ? (
@@ -56,7 +42,6 @@ const Profile = ({ user }) => {
           <AddToPortfolioForm id={_id} username={username} />
         </React.Fragment>
       ) : null}
-      
     </div>
   )
 }
