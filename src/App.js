@@ -13,15 +13,17 @@ import ProtectedRoute from './components/common/protectedRoute'
 
 const App = () => {
   const [user, setUser] = useState()
+  
 
   useEffect(() => {
     setUser(auth.getCurrentUser())
+    
   }, [])
 
   return (
     <div>
       <NavBar user={user} />
-      <div className='container'>
+      <div>
         <Switch>
           <ProtectedRoute path='/profile/' component={Profile} user={user} />
           <Route
