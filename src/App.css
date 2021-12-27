@@ -1,0 +1,41 @@
+:root {
+  --primary-color: #76aeba;
+  --primary-font: 'Abril Fatface', cursive;
+  --secondary-color: #a0c6ce;
+}
+
+.content {
+  background-color: #e4e4e4;
+}
+
+.hero {
+  background-image: url(./images/crypto-background.jpg);
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 100% 89%, 0 70%);
+  height: 50vh;
+  width: auto;
+}
+
+/* titles and headings */
+
+.title {
+  color: var(--primary-color);
+  font-family: var(--primary-font);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2.2rem;
+  text-align: center;
+}
+
+.heading {
+  color: var(--secondary-color);
+  font-family: var(--primary-font);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.sub-heading {
+  color: var(--secondary-color);
+  font-family: var(--primary-font);
+  font-weight: 300;
+}
