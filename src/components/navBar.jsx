@@ -1,13 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const NavBar = ({ user }) => {
+  const location = useLocation()
+
   return (
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
       <div className='container-fluid'>
-        <Link className='navbar-brand' to='/'>
-          Crypto Portfolio Tracker
-        </Link>
+        {location.pathname === '/' ? (
+          <Link className='navbar-brand m-2' to='/'>
+            Archer Programming
+          </Link>
+        ) : (
+          <Link className='navbar-brand m-2' to='/'>
+            Crypto Portfolio Tracker
+          </Link>
+        )}
+
         <button
           className='navbar-toggler'
           type='button'
