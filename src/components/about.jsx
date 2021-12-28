@@ -18,18 +18,17 @@ const About = () => {
       <p className='description'>
         For the database I chose MongoDB. Through various tutorials throughout
         my self guided journey, I was already familiar with MongoDB so I chose
-        it as my database. I have used React as my frontend in previous projects
-        but this one came with a new challenge.
+        it as my database.
       </p>
       <p className='description'>
-        I have used React in the pass with Class Components and because of that
-        began this project with the same style. Midway through I began to learn
-        and read about the new React Hooks. I decided to implement those into
-        the project along with the old style to display both avenues and
+        I have used React in the past with Class Components and because of that,
+        I began this project with the same style. Midway through I began to
+        learn and read about the new React Hooks. I decided to implement those
+        into the project along with the old style to display both avenues and
         approaches. As I add new features and fixes I plan on Refactoring the
-        code and changing it all over to stateless functional components. So
-        overall I believe this is a very well balanced project that shows
-        frontend to backend to database communications.
+        code to mostly functional components. Overall I believe this is a very
+        well balanced project that shows frontend to backend to database
+        communications.
       </p>
       <p className='description'>
         This was my first project working with Authentication. I use a JSON Web
