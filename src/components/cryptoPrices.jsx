@@ -43,22 +43,22 @@ class CryptoPrices extends Form {
     const { user } = this.props
     const { cryptoData, data } = this.state
     return (
-      <React.Fragment>
-        <h1>Get Current Crypto Prices</h1>
+      <div className='container'>
+        <h1 className='title'>Get Current Crypto Prices</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('ticker', 'Ticker Symbol')}
           {this.renderButton('Search')}
         </form>
         {cryptoData ? (
-          <table>
-            <thead>
+          <table className='table'>
+            <thead className='table-head'>
               <tr>
                 <th></th>
                 <th>Current Price</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='table-body'>
               <tr>
                 <th>{data.ticker.toUpperCase()}</th>
                 <td>{cryptoData}</td>
@@ -75,7 +75,7 @@ class CryptoPrices extends Form {
             </tbody>
           </table>
         ) : null}
-      </React.Fragment>
+      </div>
     )
   }
 }

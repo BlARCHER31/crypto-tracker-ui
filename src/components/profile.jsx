@@ -9,8 +9,11 @@ const Profile = ({ user }) => {
   let cryptoId = null
 
   function onShowAddForm() {
-    setShowAddForm(true)
-    setShowRemoveForm(false)
+    if (showAddForm === false) {
+      setShowAddForm(true)
+    } else {
+      setShowAddForm(false)
+    }
   }
   return (
     <div className='container'>

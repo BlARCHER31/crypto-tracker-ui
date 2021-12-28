@@ -23,7 +23,7 @@ const ProfileTable = ({ id, username, cryptoId }) => {
     <p>Add Cryptos to your portfolio to display them here.</p>
   ) : (
     <table className='table'>
-      <thead className='table-dark'>
+      <thead className='table-head'>
         <tr>
           <th>Ticker</th>
           <th>Amount</th>

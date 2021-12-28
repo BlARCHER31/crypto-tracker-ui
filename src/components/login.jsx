@@ -31,14 +31,14 @@ class Login extends Form {
   }
   render() {
     return (
-      <React.Fragment>
+      <div className='container'>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('email', 'Email', 'email')}
           {this.renderInput('password', 'Password', 'password')}
           {this.renderButton('Login')}
         </form>
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -1,16 +1,19 @@
-import { ignore } from 'joi-browser'
 import React, { useEffect, useState } from 'react'
 import fetchCurrentPrice from '../services/cryptoCurrentPrice'
 import calculateTotalWorth from '../utils/calculateWorth'
 import Loading from './common/loading'
 import RemoveFromPortfolio from './removeFromPortfolioForm'
 
-const ProfileTableRow = ({ info, username, onClick }) => {
+const ProfileTableRow = ({ info, username }) => {
   const [currentPrice, setCurrentPrice] = useState(null)
   const [showRemoveForm, setShowRemoveForm] = useState(false)
 
   function onShowRemoveForm() {
-    setShowRemoveForm(true)
+    if (showRemoveForm === false) {
+      setShowRemoveForm(true)
+    } else {
+      setShowRemoveForm(false)
+    }
   }
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const ProfileTableRow = ({ info, username, onClick }) => {
       </tr>
       {showRemoveForm ? (
         <tr className='d-flex'>
-          <td colSpan={4}>
+          <td key={info.amount - 1} colSpan={4}>
             <RemoveFromPortfolio
               cryptoName={info.cryptoName}
               objId={info._id}

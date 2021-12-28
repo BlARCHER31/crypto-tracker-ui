@@ -45,7 +45,7 @@ class Register extends Form {
 
   render() {
     return (
-      <React.Fragment>
+      <div className='container'>
         <h1>Register New User</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('name', 'Name')}
@@ -54,7 +54,7 @@ class Register extends Form {
           {this.renderInput('password', 'Password', 'password')}
           {this.renderButton('Register User')}
         </form>
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -1,19 +1,39 @@
 :root {
+  --accent-color: #052840;
   --primary-color: #76aeba;
   --primary-font: 'Abril Fatface', cursive;
   --secondary-color: #a0c6ce;
+  --secondary-font: 'Playfair Display', serif;
+}
+
+table {
+  background-color: #dbd9d9;
+  box-shadow: 5px 5px 5px #bebebe;
+}
+.table-head {
+  background-color: var(--accent-color);
+  color: #e4e4e4;
+  font-family: var(--primary-font);
 }
 
 .content {
   background-color: #e4e4e4;
+  font-family: var(--secondary-font);
+}
+
+.navbar {
+  background-color: var(--accent-color) !important;
 }
 
 .hero {
   background-image: url(./images/crypto-background.jpg);
   background-repeat: no-repeat;
   clip-path: polygon(0 0, 100% 0, 100% 89%, 0 70%);
-  height: 50vh;
+  height: 65vh;
   width: auto;
+}
+
+@media screen and (min-width: 500px) {
 }
 
 /* titles and headings */
@@ -37,5 +57,34 @@
 .sub-heading {
   color: var(--secondary-color);
   font-family: var(--primary-font);
-  font-weight: 300;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+/* grid */
+
+.grid-1x2 {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column: 1;
+}
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (min-width: 500px) {
+  .grid-1x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    gap: 0 1.6rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .icons {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
