@@ -4,7 +4,7 @@ async function addToPortfolio(cryptoName, amount, _id) {
   const token = localStorage.getItem('token')
   try {
     await axios.put(
-      `http://localhost:5000/api/portfolio`,
+      `https://archer-crypto.glitch.me/api/portfolio`,
       { cryptoName, amount, _id },
       {
         headers: {
@@ -22,7 +22,7 @@ async function getPortfolio(_id) {
 
   try {
     let response = await axios.get(
-      `http://localhost:5000/api/portfolio/${_id}`,
+      `https://archer-crypto.glitch.me/api/portfolio/${_id}`,
       {
         headers: {
           'x-auth-token': token,
@@ -38,7 +38,7 @@ async function getPortfolio(_id) {
 async function deletePortfolioItem(user, _id) {
   const token = localStorage.getItem('token')
   try {
-    await axios.delete(`http://localhost:5000/api/portfolio/${user}/${_id}`, {
+    await axios.delete(`https://archer-crypto.glitch.me/api/portfolio/${user}/${_id}`, {
       headers: {
         'x-auth-token': token,
       },
@@ -52,7 +52,7 @@ async function decreasePortfolioAmount(amount, cryptoId, username) {
   const token = localStorage.getItem('token')
   try {
     await axios.put(
-      `http://localhost:5000/api/portfolio/update-amount`,
+      `https://archer-crypto.glitch.me/api/portfolio/update-amount`,
       { amount, cryptoId, username },
       {
         headers: {

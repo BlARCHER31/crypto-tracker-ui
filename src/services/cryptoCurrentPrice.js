@@ -4,7 +4,7 @@ async function getCryptoPrice(cryptoTicker) {
   let cryptoData
   try {
     cryptoData = await axios.get(
-      `http://localhost:5000/api/crypto-price/${cryptoTicker}`
+      `https://archer-crypto.glitch.me/api/crypto-price/${cryptoTicker}`
     )
     return cryptoData.data.amount || cryptoData.data.bid
   } catch (error) {

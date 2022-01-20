@@ -4,6 +4,10 @@ const About = () => {
   return (
     <div>
       <p className='title'>About the Project</p>
+      <p className='description'>
+        The backend is deployed onto the glitch platform. Mainly for ease of
+        deployment and economical use.
+      </p>
       <p className='heading'>Takeaways</p>
       <p className='description'>
         I learned a ton doing this project from start to finish. There are still

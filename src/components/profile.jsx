@@ -16,8 +16,8 @@ const Profile = ({ user }) => {
     }
   }
   return (
-    <div className='container'>
-      <div className='row  m-4'>
+    <div className='container profile'>
+      <div className='row'>
         <div className='col-sm-3'>
           <i className='fa fa-5x fa-user-circle'></i>
           <h1 className='m-2'>{username}</h1>
@@ -36,7 +36,9 @@ const Profile = ({ user }) => {
             </h3>
           </div>
 
-          {<ProfileTable username={username} id={_id} cryptoId={cryptoId} />}
+          <div className='overflow-scroll'>
+            {<ProfileTable username={username} id={_id} cryptoId={cryptoId} />}
+          </div>
         </div>
       </div>
       {showAddForm ? (

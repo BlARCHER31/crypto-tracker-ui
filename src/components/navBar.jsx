@@ -8,9 +8,9 @@ const NavBar = ({ user }) => {
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
       <div className='container-fluid'>
         {location.pathname === '/' ? (
-          <Link className='navbar-brand m-2' to='/'>
+          <a className='navbar-brand m-2' href='https://archerprogramming.com/'>
             Archer Programming
-          </Link>
+          </a>
         ) : (
           <Link className='navbar-brand m-2' to='/'>
             Crypto Portfolio Tracker

@@ -45,6 +45,9 @@ class CryptoPrices extends Form {
     return (
       <div className='container'>
         <h1 className='title'>Get Current Crypto Prices</h1>
+        <p className='description'>
+          If you do not know any Crypto Tickers, try BTC, XRP, or ETH.
+        </p>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('ticker', 'Ticker Symbol')}
           {this.renderButton('Search')}

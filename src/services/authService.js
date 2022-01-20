@@ -4,10 +4,13 @@ import jwtDecode from 'jwt-decode'
 const tokenKey = 'token'
 
 async function login(email, password) {
-  const { data: jwt } = await axios.post('http://localhost:5000/api/auth/', {
-    email,
-    password,
-  })
+  const { data: jwt } = await axios.post(
+    'https://archer-crypto.glitch.me/api/auth/',
+    {
+      email,
+      password,
+    }
+  )
   localStorage.setItem(tokenKey, jwt)
 }
 

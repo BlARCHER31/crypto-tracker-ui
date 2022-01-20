@@ -1,9 +1,24 @@
 :root {
   --accent-color: #052840;
   --primary-color: #76aeba;
-  --primary-font: 'Abril Fatface', cursive;
+  --primary-font: 'Ubuntu Mono', monospace;
   --secondary-color: #a0c6ce;
   --secondary-font: 'Playfair Display', serif;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  background-color: #e4e4e4;
+  font-family: var(--secondary-font);
+}
+
+.content-wrap {
+  flex: 1;
 }
 
 table {
@@ -16,13 +31,42 @@ table {
   font-family: var(--primary-font);
 }
 
-.content {
-  background-color: #e4e4e4;
-  font-family: var(--secondary-font);
-}
-
 .navbar {
   background-color: var(--accent-color) !important;
+}
+
+/* Footer */
+
+.footer {
+  align-items: center;
+  background: var(--accent-color);
+  bottom: 0;
+  color: var(--secondary-color);
+  display: grid;
+  font-family: var(--primary-font);
+  grid-template-columns: repeat(2, 1fr);
+  height: 100px;
+  justify-items: center;
+  left: 0;
+  position: relative;
+  right: 0;
+  width: 100%;
+}
+
+.footer h5 {
+  text-align: center;
+}
+
+.footer a {
+  padding: 1rem;
+}
+
+@media screen and (max-width: 392px) {
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
 }
 
 .hero {
@@ -32,7 +76,6 @@ table {
   height: 65vh;
   width: auto;
 }
-
 @media screen and (min-width: 500px) {
 }
 
@@ -87,4 +130,8 @@ table {
     justify-content: space-between;
     align-items: center;
   }
+}
+
+.profile {
+  margin-top: 3rem;
 }

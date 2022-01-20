@@ -28,10 +28,10 @@ class Register extends Form {
       auth.loginWithJwt(response.headers['x-auth-token'])
       window.location = '/'
     } catch (error) {
-      console.log(error.response)
+      console.log(error)
       if (error.response && error.response.status === 400) {
         const errors = { ...this.state.errors }
-        if (error.response.data === 'Email already registered.') {
+        if (error.response.data == 'Email already registered.') {
           errors.email = error.response.data
           this.setState({ errors })
         }
@@ -46,7 +46,7 @@ class Register extends Form {
   render() {
     return (
       <div className='container'>
-        <h1>Register New User</h1>
+        <h1 className='title'>Register New User</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('name', 'Name')}
           {this.renderInput('username', 'Username')}
