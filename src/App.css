@@ -12,14 +12,16 @@
   min-height: 100vh;
 }
 
+.content-wrap {
+  flex: 1;
+}
+
 .content {
   background-color: #e4e4e4;
   font-family: var(--secondary-font);
 }
 
-.content-wrap {
-  flex: 1;
-}
+
 
 table {
   background-color: #dbd9d9;
