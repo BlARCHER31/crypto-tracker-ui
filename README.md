@@ -4,9 +4,11 @@
 
 Coinbase is an app that lets you buy and sell all sorts of cryptocurrencies, like Bitcoin, Ethereum, Litecoin and much more. You can also use Coinbase to convert one cryptocurrency to another, or to send and receive cryptocurrency to and from other people.</br>
 
-Coinbase also offers a great developer portal for software engineers to develop apps based off of their platform.
-For this project I have implemented the price endpoint offered by Coinbase to find out specific cryptocurrency
-prices. </br>
+## Uphold ![Uphold Logo](src/images/readme/uphold.png) </br>
+
+Uphold is another app that lets you buy, sell and trade cryptocurrencies. Uphold offers some of the same, but also different cryptos than Coinbase.</br>
+
+Both Uphold and Coinbase offer a great developer portal for software engineers to develop apps based off of their respective platforms. For this project I have implemented the price endpoints offered by Coinbase and Uphold to find out specific cryptocurrency prices. </br>
 
 ## Purpose of the Project </br>
 
@@ -29,10 +31,13 @@ I also was able to get a firm understanding and grasp with React Hooks. I was ha
 
 ## Tech Stack
 
+- ![react logo](src/images/readme/react.png) [React](https://react.dev/)
+  <br/>
+
 - ![JavaScript logo](src/images/readme/JavaScript-logo.png) [JavaScript](https://www.javascript.com/)
   <br/>
 
-- ![react logo](src/images/readme/react.png) [React](https://react.dev/)
+- ![HTML/CSS logo](src/images/readme/html-css.jpg) [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)[CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
   <br/>
 
 - ![MongoDB logo](src/images/readme/mongodb-logo.jpg) [MongoDB](https://mongodb.com/)
